@@ -1,4 +1,4 @@
-package com.sfe.super.hero;
+package com.sfe.superHero;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

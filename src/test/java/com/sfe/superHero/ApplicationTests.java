@@ -1,4 +1,4 @@
-package com.sfe.super.hero;
+package com.sfe.superHero;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
