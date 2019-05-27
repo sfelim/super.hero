@@ -1,12 +1,26 @@
 package com.sfe.superHero.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 public class Mission {
+
+    public Mission() {
+    }
+
+    public Mission(Long id, String missionName, Boolean isCompleted, Boolean IsDeleted) {
+        this.id = id;
+        this.missionName = missionName;
+        this.isCompleted = isCompleted;
+        this.IsDeleted = IsDeleted;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,14 +30,14 @@ public class Mission {
     private String  missionName;
 
     @Column(name = "IsCompleted")
-    private Boolean isCompleted;
+    private Boolean isCompleted = false;
 
-    @Column(name = "Isdeleted")
-    private Boolean isdeleted;
+    @Column(name = "IsDeleted")
+    private Boolean IsDeleted = false;
 
-    @JsonBackReference
-    @ManyToMany
-    List<SuperHero> superHero;
+    @JsonIgnoreProperties("missions")
+    @ManyToMany(mappedBy = "missions", fetch = FetchType.LAZY)
+    Set<SuperHero> superHero = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -49,19 +63,19 @@ public class Mission {
         isCompleted = completed;
     }
 
-    public Boolean getIsdeleted() {
-        return isdeleted;
+    public Boolean getDeleted() {
+        return IsDeleted;
     }
 
-    public void setIsdeleted(Boolean isdeleted) {
-        this.isdeleted = isdeleted;
+    public void setDeleted(Boolean IsDeleted) {
+        this.IsDeleted = IsDeleted;
     }
 
-    public List<SuperHero> getSuperHero() {
+    public Set<SuperHero> getSuperHero() {
         return superHero;
     }
 
-    public void setSuperHero(List<SuperHero> superHero) {
+    public void setSuperHero(Set<SuperHero> superHero) {
         this.superHero = superHero;
     }
 }
