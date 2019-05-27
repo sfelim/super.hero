@@ -55,7 +55,7 @@ public class SuperHeroController {
     @PutMapping("/SuperHero/mission")
     ResponseEntity<SuperHero> newMission(@RequestParam("superHeroId") Long superHeroId, @RequestParam("missionId") Long missionId) throws ValidationException {
 
-        Optional<SuperHero> hero = this.superHeroService.findById(superHeroId);
+        Optional<SuperHero> hero = this.superHeroService.findSuperById(superHeroId);
         if (hero.isPresent()) {
             Optional<Mission> mission = this.missionService.findById(missionId);
             if (mission.isPresent()) {
@@ -70,7 +70,7 @@ public class SuperHeroController {
     @DeleteMapping("/SuperHero/mission")
     ResponseEntity<SuperHero> abortMission(@RequestParam("superHeroId") Long superHeroId, @RequestParam("missionId") Long missionId) throws ValidationException {
 
-        Optional<SuperHero> hero = this.superHeroService.findById(superHeroId);
+        Optional<SuperHero> hero = this.superHeroService.findSuperById(superHeroId);
         if (hero.isPresent()) {
             Optional<Mission> mission = this.missionService.findById(missionId);
             if (mission.isPresent()) {
