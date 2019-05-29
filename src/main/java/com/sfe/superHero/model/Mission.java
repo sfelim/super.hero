@@ -1,18 +1,20 @@
 package com.sfe.superHero.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 public class Mission {
 
     public Mission() {
+    }
+
+    public Mission(@NotBlank String missionName) {
+        this.missionName = missionName;
     }
 
     public Mission(Long id, String missionName, Boolean isCompleted, Boolean IsDeleted) {
@@ -26,8 +28,9 @@ public class Mission {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank
     @Column(name = "MissionName")
-    private String  missionName;
+    private String missionName;
 
     @Column(name = "IsCompleted")
     private Boolean isCompleted = false;
