@@ -31,7 +31,7 @@ public class MissionController {
 
     @PutMapping("/mission")
     Mission update(@RequestBody Mission mission) throws ValidationException {
-        if(this.missionService.findById(mission.getId()).isPresent() && ! mission.getDeleted().booleanValue()){
+        if (this.missionService.findById(mission.getId()).isPresent() && !mission.getDeleted().booleanValue()) {
             mission.setDeleted(true);
             return this.missionService.save(mission);
         } else throw new ValidationException("Cannot update this mission.");
@@ -41,9 +41,9 @@ public class MissionController {
     void delete(@PathVariable Long id) throws ValidationException {
         Optional<Mission> mission = this.missionService.findById(id);
 
-        if(mission.isPresent()){
+        if (mission.isPresent() && !mission.get().getCompleted()) {
             mission.get().setDeleted(true);
             this.missionService.save(mission.get());
-        } else throw new ValidationException("Cannot find this mission.");
+        } else throw new ValidationException("Cannot delete this mission.");
     }
 }

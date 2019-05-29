@@ -16,9 +16,6 @@ public class SuperHeroServiceIntegrationTest {
     @Autowired
     SuperHeroService superHeroService;
 
-    @Autowired
-    MissionService missionService;
-
     @Test
     public  void contextLoad() {
         Assert.assertNotNull(this.superHeroService);

@@ -30,19 +30,19 @@ public class SuperHeroControllerIntegrationTest {
     SuperHeroService superHeroService;
 
     @Test
-    public  void contextLoad() {
+    public void contextLoad() {
         Assert.assertNotNull(this.superHeroController);
     }
 
     @Test
-    public void testReadCreatDelete(){
+    public void testReadCreatDelete() throws Exception {
         String superHeroName = "Wonder Woman";
         SuperHero superMan = new SuperHero();
         superMan.setSuperHeroName(superHeroName);
 
         SuperHero superHero = this.superHeroController.create(superMan);
-        Iterable<SuperHero> heroes = this.superHeroController.findAll();
-        Assertions.assertThat(heroes).first().hasFieldOrPropertyWithValue("superHeroName",superHeroName );
+        Iterable<SuperHero> heroes = this.superHeroController.findSuper();
+        Assertions.assertThat(heroes).first().hasFieldOrPropertyWithValue("superHeroName", superHeroName);
 
         this.superHeroController.delete(superHero.getId());
         Assertions.assertThat(this.superHeroController.findById(superHero.getId()).getBody()).isNull();
@@ -55,8 +55,7 @@ public class SuperHeroControllerIntegrationTest {
         savedThePrincess.setMissionName(missionName);
 
         String superHeroName = "Flash";
-        SuperHero superMan = new SuperHero();
-        superMan.setSuperHeroName(superHeroName);
+        SuperHero superMan = new SuperHero(superHeroName);
 
         superMan = this.superHeroService.save(superMan);
         savedThePrincess = this.missionService.save(savedThePrincess);
@@ -68,12 +67,10 @@ public class SuperHeroControllerIntegrationTest {
     @Test
     public void testAbortMission() throws Exception {
         String missionName = "Saved the Princess Zelda";
-        Mission savedThePrincess = new Mission();
-        savedThePrincess.setMissionName(missionName);
+        Mission savedThePrincess = new Mission(missionName);
 
         String superHeroName = "Link";
-        SuperHero superMan = new SuperHero();
-        superMan.setSuperHeroName(superHeroName);
+        SuperHero superMan = new SuperHero(superHeroName);
 
         superMan = this.superHeroService.save(superMan);
         savedThePrincess = this.missionService.save(savedThePrincess);
@@ -90,12 +87,10 @@ public class SuperHeroControllerIntegrationTest {
     public void testAbortMissionCompleted() throws Exception {
         try {
             String missionName = "Saved the Princess Pitch";
-            Mission savedThePrincess = new Mission();
-            savedThePrincess.setMissionName(missionName);
+            Mission savedThePrincess = new Mission(missionName);
 
             String superHeroName = "Mario";
-            SuperHero superMario = new SuperHero();
-            superMario.setSuperHeroName(superHeroName);
+            SuperHero superMario = new SuperHero(superHeroName);
 
             superMario = this.superHeroService.save(superMario);
             savedThePrincess = this.missionService.save(savedThePrincess);

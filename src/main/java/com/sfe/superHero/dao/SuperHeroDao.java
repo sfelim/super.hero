@@ -6,5 +6,6 @@ import java.util.Optional;
 
 public interface SuperHeroDao {
     Iterable<SuperHero> findSupers();
+
     Optional<SuperHero> findSuperById(Long id);
 }
