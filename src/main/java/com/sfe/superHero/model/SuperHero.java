@@ -1,17 +1,26 @@
 package com.sfe.superHero.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
 public class SuperHero {
 
     public SuperHero() {
+    }
+
+    public SuperHero(@NotBlank String superHeroName) {
+        this.superHeroName = superHeroName;
+    }
+
+    public SuperHero(String firstName, String lastName, @NotBlank String superHeroName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.superHeroName = superHeroName;
     }
 
     public SuperHero(Long id, String firstName, String lastName, String superHeroName) {
@@ -31,6 +40,7 @@ public class SuperHero {
     @Column(name = "Lastname")
     private String lastName;
 
+    @NotBlank
     @Column(name = "Superheroname", unique = true)
     private String superHeroName;
 
